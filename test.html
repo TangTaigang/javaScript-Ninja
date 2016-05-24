@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.js"></script>
+</head>
+<style type="text/css">
+</style>
+
+<body>
+    <table>
+        <tbody></tbody>
+    </table>
+</body>
+<script type="text/javascript">
+/*var i = 0;
+    	setTimeout(function repeatMe(){
+    		console.log(i++);
+    		setTimeout(repeatMe,1000);
+    	},1000);
+
+    	setInterval(function(){
+
+    	},1000)*/
+
+
+/*var tbody = document.getElementsByTagName("tbody")[0];
+for (var i = 0; i < 50000; i++) {
+	var tr = document.createElement("tr");
+	for (var t = 0; t < 6; t++) {
+		var td = document.createElement("td");
+		td.appendChild(document.createTextNode(i + "," + t));
+		tr.appendChild(td);
+	}
+	tbody.appendChild(tr);
+}*/
+
+
+var rowCount = 80000;
+var divideInto = 50;
+var chunksSize = rowCount / divideInto;
+var iteration = 0;
+var table = document.getElementsByTagName("tbody")[0];
+
+setTimeout(function generateRows() {
+    var base = (chunksSize) * iteration;
+    for (var i = 0; i < chunksSize; i++) {
+        var tr = document.createElement("tr");
+        for (var t = 0; t < 6; t++) {
+            var td = document.createElement("td");
+            td.appendChild(document.createTextNode((i + base) + "," + t + "," + iteration));
+            tr.appendChild(td);
+        }
+        table.appendChild(tr);
+    }
+    iteration++;
+    if (iteration < divideInto)
+        setTimeout(generateRows, 0);
+}, 0)
+</script>
+
+</html>
